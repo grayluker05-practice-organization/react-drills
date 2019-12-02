@@ -6,27 +6,25 @@ class App extends Component {
     super();
 
     this.state = {
-      filterString: '',
-      friends: ['Josh', 'Reese', 'Maxwell', 'Christian']
+      friends: ['Josh', 'Reese', 'Maxwell', 'Christian'],
+      filteredFriends: ''
     }
   }
 
-  handleFilter = (filter) => {
+  handleFilter = (val) => {
     this.setState({
-      filterString: filter
+      filteredFriends: val
     })
   }
 
   render() {
-    let friendsToDisplay = this.state.friends.filter(e => {
-      return e.includes(this.state.filterString)
-    }).map((e, i) => {
-      return <h2 key={i}>{e}</h2>
-    })
+    let friendsToDisplay = this.state.friends.filter((e, i) => {
+      return e.includes(this.state.filteredFriends);
+    }).map((e, i) => <h2 key={i}>{e}</h2>)
     return (
       <div className="App">
         <input onChange={e => this.handleFilter(e.target.value)}/>
-       {friendsToDisplay}
+        {friendsToDisplay}
       </div>
     );
   }
